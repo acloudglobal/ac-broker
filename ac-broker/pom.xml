@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.acloudchina</groupId>
+	<artifactId>ac-broker</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.2.RELEASE</version>
+	</parent>
+
+	<properties>
+		<broker.version>1.0.0-SNAPSHOT</broker.version>
+		<maven.test.skip>true</maven.test.skip>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<lombok.version>1.16.10</lombok.version>
+		<californium.version>1.0.6</californium.version>
+		<vertx.version>3.5.1</vertx.version>
+		<log4jdbc.version>0.2.7</log4jdbc.version>
+		<spring-kafka.version>1.2.0.RELEASE</spring-kafka.version>
+		<HikariCP.version>2.5.1</HikariCP.version>
+		<mysql-driver.version>5.1.36</mysql-driver.version>
+		<hibernate-spatial.version>5.1.0.Final</hibernate-spatial.version>
+	</properties>
+
+	<modules>
+		<module>broker-coap-server</module>
+		<module>broker-auth-server</module>
+		<module>broker-event-process</module>
+		<module>broker-mqtt-server</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.acloudchina</groupId>
+				<artifactId>broker-event-process</artifactId>
+				<version>${broker.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.acloudchina</groupId>
+				<artifactId>broker-auth-server</artifactId>
+				<version>${broker.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.californium</groupId>
+				<artifactId>californium-core</artifactId>
+				<version>${californium.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.lazyluke</groupId>
+				<artifactId>log4jdbc-remix</artifactId>
+				<version>${log4jdbc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+				<version>2.9.0</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.kafka</groupId>
+				<artifactId>spring-kafka</artifactId>
+				<version>${spring-kafka.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-spatial</artifactId>
+				<version>${hibernate-spatial.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.zaxxer</groupId>
+				<artifactId>HikariCP</artifactId>
+				<version>${HikariCP.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql-driver.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+</project>

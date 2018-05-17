@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+
+
+    <property name="LOG_HOME" value="${user.dir}/logs/"/>
+    <property name="APP_NAME" value="aconn-web-server"/>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <!--<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--<fileNamePattern>${LOG_HOME}/${APP_NAME}-%d{yyyy-MM-dd}.log</fileNamePattern>-->
+            <!--<maxHistory>30</maxHistory>-->
+        <!--</rollingPolicy>-->
+
+        <!--<encoder>-->
+            <!--<pattern>${FILE_LOG_PATTERN}</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+
+    <!--<appender name="DB" class="ch.qos.logback.classic.db.DBAppender">-->
+        <!--<connectionSource class="ch.qos.logback.core.db.DataSourceConnectionSource">-->
+            <!--<dataSource class="com.zaxxer.hikari.HikariDataSource">-->
+                <!--<driverClassName>com.mysql.jdbc.Driver</driverClassName>-->
+                <!--<jdbcUrl>jdbc:mysql://localhost:3306/aconn_log</jdbcUrl>-->
+                <!--<username>root</username>-->
+                <!--<password>1qaz</password>-->
+                <!--<poolName>aconn-log-pool</poolName>-->
+            <!--</dataSource>-->
+        <!--</connectionSource>-->
+    <!--</appender>-->
+    <!--<appender name ="ASYNC" class="ch.qos.logback.classic.AsyncAppender">-->
+        <!--<includeCallerData>true</includeCallerData>-->
+        <!--<appender-ref ref ="DB"/>-->
+    <!--</appender>-->
+
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+
+    <logger name="org.springframework.data.mongodb.core.MongoTemplate" level="debug"/>
+    <logger name="org.springframework.web.servlet.mvc.method.annotation" level="error"/>
+    <logger name="jdbc.sqltiming" level="INFO"/>
+    <logger name="jdbc.sqlonly" level="OFF"/>
+    <logger name="jdbc.resultsettable" level="OFF"/>
+    <logger name="jdbc.resultset" level="OFF"/>
+    <logger name="jdbc.connection" level="OFF"/>
+    <logger name="jdbc.audit" level="OFF"/>
+    <logger name="org.springframework.data.repository.config" level="WARN"/>
+    <!--<logger name="sysLog" level="INFO">-->
+        <!--<appender-ref ref="ASYNC" />-->
+    <!--</logger>-->
+
+</configuration>
