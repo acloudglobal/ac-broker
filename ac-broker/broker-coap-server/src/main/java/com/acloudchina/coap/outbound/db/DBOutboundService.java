@@ -13,7 +13,7 @@ import com.acloudchina.event.bean.KafkaMessage;
 public class DBOutboundService implements CommandOutboundService {
 
 	@Override
-	public List<String> getCommand(KafkaMessage msg) {
+	public List<byte[]> getCommand(KafkaMessage msg) {
 		// TODO Auto-generated method stub
 		return null;
 	}

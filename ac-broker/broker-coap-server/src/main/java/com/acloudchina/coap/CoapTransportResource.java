@@ -36,7 +36,6 @@ public class CoapTransportResource extends CoapResource {
 	private DataHandleFacade dataHandleFacade;
 	private ObserverDataHandle observerDataHandle;
 	private Field observerField;
-	private long timeout;
 	private PushToClientService pushToClientService;
 
 	public CoapTransportResource(String name, AuthService authService, DataHandleFacade dataHandleFacade,
@@ -56,27 +55,6 @@ public class CoapTransportResource extends CoapResource {
 		observerField.setAccessible(true);
 
 		addObserver(new CoapResourceObserver());
-
-		Timer timer = new Timer();
-		timer.schedule(new TimeTask(), 0, 1000);
-	}
-
-	private class TimeTask extends TimerTask {
-		@Override
-		public void run() {
-//			 changed();
-			// System.out.println(CacheExchange.size());
-//			if (Cache.size() > 0) {
-//				System.out.println(Cache.size());
-//				Cache.all().forEach((x,e)->{
-//					try {
-//						e.onNotificationMsg("ok");
-//					} catch (Exception e1) {
-//						e1.printStackTrace();
-//					}
-//				});
-//			}
-		}
 	}
 
 	@Override

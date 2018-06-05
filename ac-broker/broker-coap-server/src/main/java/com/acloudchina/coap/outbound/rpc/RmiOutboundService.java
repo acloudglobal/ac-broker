@@ -21,7 +21,7 @@ public class RmiOutboundService implements CommandOutboundService {
 	private RmiProxyFactoryBean rmiProxyFactoryBean;
 
 	@Override
-	public List<String> getCommand(KafkaMessage msg) {
+	public List<byte[]> getCommand(KafkaMessage msg) {
 		DataInvoker dataInvoker = (DataInvoker) rmiProxyFactoryBean.getObject();
 		return dataInvoker.getCommands(msg.getTenantId(), msg.getEndpointId(), msg.getSchemaId());
 	}

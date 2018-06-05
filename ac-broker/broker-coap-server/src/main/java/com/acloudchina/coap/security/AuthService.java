@@ -28,7 +28,7 @@ public class AuthService {
 			bean.setToken(mp.get("token"));
 			bean.setUsername(mp.get("username"));
 		
-			ValidationInfo auth = authHandle.auth(bean, bean.getAuthType());
+			ValidationInfo auth = authHandle.auth(bean);
 			if (auth != null && auth.getAuth_valid()) {
 				return true;
 			}

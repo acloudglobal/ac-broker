@@ -24,7 +24,7 @@ public class RedisOutboundService implements CommandOutboundService {
 	@Value("${spring.redis.database}")
 	public int dbIndex;
 
-	public List<String> getCommand(KafkaMessage msg) {
+	public List<byte[]> getCommand(KafkaMessage msg) {
 		jedis.select(dbIndex);
 
 		String keyRegx = "";
@@ -35,9 +35,9 @@ public class RedisOutboundService implements CommandOutboundService {
 		}
 		Set<String> keys = jedis.keys(keyRegx);
 
-		List<String> result = new ArrayList<>();
+		List<byte[]> result = new ArrayList<>();
 		keys.forEach(key -> {
-			String value = jedis.get(key);
+			byte[] value = jedis.get(key.getBytes());
 			result.add(value);
 		});
 

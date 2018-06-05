@@ -42,7 +42,7 @@ public class CommandHandle implements DataHandle {
 		byte[] payload = request.getPayload();
 
 		List<String> path = request.getOptions().getUriPath();
-		if (path.size() < 6) {
+		if (path.size() < 7) {
 			CoapResponse.createAndSendResponse(ResponseCode.BAD_REQUEST, "指令请求路径不正确", exchange);
 		} else {
 			String version = path.get(UriPositionDefine.VERSION_POSITION);
@@ -52,16 +52,8 @@ public class CommandHandle implements DataHandle {
 
 			String cmdType = path.get(4);
 			String format = path.get(5);
-
-			String schemaId = "";
-			if (!FormatTypeEnum.json.name().equals(format)) {
-				if (path.size() < 7) {
-					CoapResponse.createAndSendResponse(ResponseCode.BAD_REQUEST, "指令请求路径不正确", exchange);
-					return;
-				}
-				schemaId = path.get(6);
-			}
-
+			String schemaId = path.get(6);
+			
 			KafkaMessage msg = new KafkaMessage();
 			msg.setEndpointId(endpointId);
 			msg.setPayload(payload);
@@ -108,7 +100,7 @@ public class CommandHandle implements DataHandle {
 
 				CommandOutboundService cmdOutboundService = outboundFacadeService.build();
 				// 查询指令
-				List<String> commands = cmdOutboundService.getCommand(msg);
+				List<byte[]> commands = cmdOutboundService.getCommand(msg);
 				byte[] responsePayload = CommandTranslate.transeToPayload(msg.getFormat(), commands);
 
 				// 将请求记录下来保存为历史

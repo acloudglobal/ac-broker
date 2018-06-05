@@ -8,6 +8,6 @@ import lombok.Data;
 public class JsonCommand {
 
 	private int count;
-	private List<String> commands;
+	private List<byte[]> commands;
 	private long responseTime;
 }

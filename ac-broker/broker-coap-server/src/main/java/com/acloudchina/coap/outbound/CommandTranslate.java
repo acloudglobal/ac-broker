@@ -8,14 +8,14 @@ import com.acloudchina.event.common.JsonUtil;
 
 public class CommandTranslate {
 
-	public static byte[] transeToPayload(String format, List<String> cmds) {
+	public static byte[] transeToPayload(String format, List<byte[]> cmds) {
 		if (FormatTypeEnum.json.name().equals(format)) {
 			return handleJson(cmds);
 		}
 		return null;
 	}
 
-	private static byte[] handleJson(List<String> cmds) {
+	private static byte[] handleJson(List<byte[]> cmds) {
 		JsonCommand jc = new JsonCommand();
 		jc.setCommands(cmds);
 		jc.setCount(cmds.size());

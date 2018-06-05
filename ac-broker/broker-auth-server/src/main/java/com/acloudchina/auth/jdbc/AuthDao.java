@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acloudchina.auth.AuthConstants;
+
 @Transactional
 @Service
 public class AuthDao {
@@ -15,12 +17,17 @@ public class AuthDao {
 	@Autowired
 	@PersistenceContext
 	EntityManager entityManager;
+	
+	
+	public int getAuthType(String tenantId,String endpointId){
+		return AuthConstants.AUTH_CLIENTID_USERNAME_PASSWORD;
+	}
 
 	/**
 	 * clientId认证
 	 */
 	public boolean auth(String endpointId, String tenantId) {
-		String sql = "select * from ac_endpoint_auth where tenant_id='" + tenantId + "' endpoint_id='" + endpointId
+		String sql = "select * from ac_endpoint_auth where tenant_id='" + tenantId + "' and endpoint_id='" + endpointId
 				+ "' and deleted=0";
 		System.out.println(sql);
 		Query query = entityManager.createNativeQuery(sql);
@@ -33,8 +40,8 @@ public class AuthDao {
 	 * clientId+username+password认证
 	 */
 	public boolean auth(String endpointId, String tenantId, String userName, String password) {
-		String sql = "select * from ac_endpoint_auth where tenant_id='" + tenantId + "' endpoint_id='" + endpointId
-				+ "'  and username='" + userName + "' and password='" + password + "' and deleted=0";
+		String sql = "select * from ac_endpoint_auth where tenant_id='" + tenantId + "' and endpoint_id='" + endpointId
+				+ "' and username='" + userName + "' and password='" + password + "' and deleted=0";
 		Query query = entityManager.createNativeQuery(sql);
 		int resultCount = query.getResultList() == null ? 0 : query.getResultList().size();
 		return resultCount > 0 ? true : false;

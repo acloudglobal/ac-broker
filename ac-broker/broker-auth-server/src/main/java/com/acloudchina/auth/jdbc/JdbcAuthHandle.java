@@ -15,7 +15,8 @@ public class JdbcAuthHandle implements AuthHandle {
 	private AuthDao authDao;
 
 	@Override
-	public ValidationInfo auth(AuthBean auth, int authType) {
+	public ValidationInfo auth(AuthBean auth) {
+		int authType = authDao.getAuthType(auth.getTenantId(), auth.getEndpointId());
 		ValidationInfo info = null;
 		boolean result = false;
 		switch (authType) {
@@ -32,10 +33,15 @@ public class JdbcAuthHandle implements AuthHandle {
 
 			break;
 		case AuthConstants.AUTH_CLIENTID_USERNAME_PASSWORD:
-			result = authDao.auth(auth.getEndpointId(), auth.getTenantId(), auth.getUsername(), auth.getPassword());
-			if (result) {
-				info = returnReply(true, auth.getUsername(), "认证成功");
-			} else {
+			try {
+				result = authDao.auth(auth.getEndpointId(), auth.getTenantId(), auth.getUsername(), auth.getPassword());
+				if (result) {
+					info = returnReply(true, auth.getUsername(), "认证成功");
+				} else {
+					info = returnReply(false, auth.getUsername(), "认证失败");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 				info = returnReply(false, auth.getUsername(), "认证失败");
 			}
 			break;

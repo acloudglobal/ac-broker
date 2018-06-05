@@ -21,7 +21,7 @@ public class EndpointAuthController {
 	@RequestMapping(value = "/endpoint/auth", method = RequestMethod.POST)
 	@ResponseBody
 	public ValidationInfo auth(@RequestBody AuthBean auth) {
-		ValidationInfo info = jdbcHandle.auth(auth, auth.getAuthType());
+		ValidationInfo info = jdbcHandle.auth(auth);
 		return info;
 	}
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import com.acloudchina.event.bean.KafkaMessage;
 
 public interface CommandOutboundService {
-	List<String> getCommand(KafkaMessage msg);
+	List<byte[]> getCommand(KafkaMessage msg);
 	
 	String getConfiguration(KafkaMessage msg);
 	
