@@ -8,7 +8,10 @@ import com.acloudchina.auth.AuthConstants;
 import com.acloudchina.auth.AuthHandle;
 import com.acloudchina.auth.ValidationInfo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service("authHandle")
+@Slf4j
 public class JdbcAuthHandle implements AuthHandle {
 
 	@Autowired
@@ -17,6 +20,9 @@ public class JdbcAuthHandle implements AuthHandle {
 	@Override
 	public ValidationInfo auth(AuthBean auth) {
 		int authType = authDao.getAuthType(auth.getTenantId(), auth.getEndpointId());
+		
+		log.info("authType:"+authType);
+		
 		ValidationInfo info = null;
 		boolean result = false;
 		switch (authType) {

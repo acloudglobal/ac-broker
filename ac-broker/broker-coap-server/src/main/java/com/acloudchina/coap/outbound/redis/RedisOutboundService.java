@@ -36,10 +36,10 @@ public class RedisOutboundService implements CommandOutboundService {
 		Set<String> keys = jedis.keys(keyRegx);
 
 		List<byte[]> result = new ArrayList<>();
-		keys.forEach(key -> {
+		for(String key : keys){
 			byte[] value = jedis.get(key.getBytes());
 			result.add(value);
-		});
+		}
 
 		return result;
 	}

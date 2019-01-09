@@ -10,13 +10,17 @@ import com.acloudchina.auth.AuthHandle;
 import com.acloudchina.auth.ValidationInfo;
 import com.acloudchina.event.common.JsonUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class AuthService {
 
 	@Autowired
 	private AuthHandle authHandle;
 
 	public boolean validate(Map<String, String> mp) {
+		log.info("validate Map:"+mp);
 		if (mp == null) {
 			return validate();
 		} else {

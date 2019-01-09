@@ -10,8 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.acloudchina.auth.AuthConstants;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Transactional
 @Service
+@Slf4j
 public class AuthDao {
 
 	@Autowired
@@ -29,7 +32,9 @@ public class AuthDao {
 	public boolean auth(String endpointId, String tenantId) {
 		String sql = "select * from ac_endpoint_auth where tenant_id='" + tenantId + "' and endpoint_id='" + endpointId
 				+ "' and deleted=0";
-		System.out.println(sql);
+		
+		log.info("auth SQL:"+sql);
+		
 		Query query = entityManager.createNativeQuery(sql);
 		int resultCount = query.getResultList() == null ? 0 : query.getResultList().size();
 		boolean result = resultCount > 0 ? true : false;
@@ -42,6 +47,9 @@ public class AuthDao {
 	public boolean auth(String endpointId, String tenantId, String userName, String password) {
 		String sql = "select * from ac_endpoint_auth where tenant_id='" + tenantId + "' and endpoint_id='" + endpointId
 				+ "' and username='" + userName + "' and password='" + password + "' and deleted=0";
+		
+		log.info("auth SQL:"+sql);
+		
 		Query query = entityManager.createNativeQuery(sql);
 		int resultCount = query.getResultList() == null ? 0 : query.getResultList().size();
 		return resultCount > 0 ? true : false;
