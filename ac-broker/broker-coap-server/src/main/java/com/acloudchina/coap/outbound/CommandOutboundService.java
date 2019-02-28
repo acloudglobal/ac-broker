@@ -7,6 +7,8 @@ import com.acloudchina.event.bean.KafkaMessage;
 public interface CommandOutboundService {
 	List<byte[]> getCommand(KafkaMessage msg);
 	
+	List<String> getCommand(String tenantId,String endpointId);
+	
 	String getConfiguration(KafkaMessage msg);
 	
 	String getProfile(KafkaMessage msg,String keys);

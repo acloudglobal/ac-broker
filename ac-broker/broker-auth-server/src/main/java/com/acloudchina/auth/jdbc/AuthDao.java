@@ -54,6 +54,19 @@ public class AuthDao {
 		int resultCount = query.getResultList() == null ? 0 : query.getResultList().size();
 		return resultCount > 0 ? true : false;
 	}
+	
+	/**
+	 * username+password认证
+	 */
+	public boolean auth(String tenantId, String userName, String password) {
+		String sql = "select * from ac_endpoint_auth where tenant_id='" + tenantId + "' and username='" + userName + "' and password='" + password + "' and deleted=0";
+		
+		log.info("auth SQL:"+sql);
+		
+		Query query = entityManager.createNativeQuery(sql);
+		int resultCount = query.getResultList() == null ? 0 : query.getResultList().size();
+		return resultCount > 0 ? true : false;
+	}
 
 	/**
 	 * token认证

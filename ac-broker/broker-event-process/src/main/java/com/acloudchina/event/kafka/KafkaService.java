@@ -28,6 +28,14 @@ public class KafkaService {
 
 	}
 	
+	public void sendTelemetry(KafkaMessage message,String topic) {
+		log.info("data collect event:{}", message);
+
+		kafkaTemplate.send(topic,JsonUtil.objectToJson(message));
+		log.info("data collect end,endpointId:{}", message.getEndpointId());
+
+	}
+	
 	public void sendCommandRequest(KafkaMessage message) {
 		log.info("record  req :{}", message);
 

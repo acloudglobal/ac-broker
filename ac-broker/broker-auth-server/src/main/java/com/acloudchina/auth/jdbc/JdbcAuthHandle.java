@@ -19,17 +19,18 @@ public class JdbcAuthHandle implements AuthHandle {
 
 	@Override
 	public ValidationInfo auth(AuthBean auth) {
-		int authType = authDao.getAuthType(auth.getTenantId(), auth.getEndpointId());
-		
-		log.info("authType:"+authType);
+//		int authType = authDao.getAuthType(auth.getTenantId(), auth.getEndpointId());
+		int authType = auth.getAuthType();
 		
 		ValidationInfo info = null;
 		boolean result = false;
 		switch (authType) {
 		case AuthConstants.AUTH_NO:
+			log.info("authType:"+authType+";匿名认证模式");
 			info = returnReply(true, auth.getUsername(), "认证成功");
 			break;
 		case AuthConstants.AUTH_CLIENTID:
+			log.info("authType:"+authType+";clientId认证模式");
 			result = authDao.auth(auth.getEndpointId(), auth.getTenantId());
 			if (result) {
 				info = returnReply(true, auth.getUsername(), "认证成功");
@@ -38,7 +39,22 @@ public class JdbcAuthHandle implements AuthHandle {
 			}
 
 			break;
+		case AuthConstants.AUTH_USERNAME_PASSWORD:
+			log.info("authType:"+authType+";用户名+密码认证模式");
+			try {
+				result = authDao.auth(auth.getTenantId(), auth.getUsername(), auth.getPassword());
+				if (result) {
+					info = returnReply(true, auth.getUsername(), "认证成功");
+				} else {
+					info = returnReply(false, auth.getUsername(), "认证失败");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				info = returnReply(false, auth.getUsername(), "认证失败");
+			}
+			break;
 		case AuthConstants.AUTH_CLIENTID_USERNAME_PASSWORD:
+			log.info("authType:"+authType+";用户名+密码+clientid认证模式");
 			try {
 				result = authDao.auth(auth.getEndpointId(), auth.getTenantId(), auth.getUsername(), auth.getPassword());
 				if (result) {
@@ -52,6 +68,7 @@ public class JdbcAuthHandle implements AuthHandle {
 			}
 			break;
 		case AuthConstants.AUTH_TOKEN:
+			log.info("authType:"+authType+";token认证模式");
 			result = authDao.authToken(auth.getToken());
 			if (result) {
 				info = returnReply(true, auth.getUsername(), "认证成功");

@@ -25,6 +25,7 @@
 		<HikariCP.version>2.5.1</HikariCP.version>
 		<mysql-driver.version>5.1.36</mysql-driver.version>
 		<hibernate-spatial.version>5.1.0.Final</hibernate-spatial.version>
+		<fastjson.version>1.2.49</fastjson.version>
 	</properties>
 
 	<modules>
@@ -92,6 +93,11 @@
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql-driver.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

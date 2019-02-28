@@ -42,4 +42,10 @@ public class DBOutboundService implements CommandOutboundService {
 		
 	}
 
+	@Override
+	public List<String> getCommand(String tenantId, String endpointId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

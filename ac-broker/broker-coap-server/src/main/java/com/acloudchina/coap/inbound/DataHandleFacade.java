@@ -24,6 +24,9 @@ public class DataHandleFacade {
 	@Autowired
 	@Qualifier("profileHandle")
 	private DataHandle profileHandle;
+	@Autowired
+	@Qualifier("forwardHandle")
+	private DataHandle forwardHandle;
 	
 	public DataHandle build(ProtypeEnum type) {
 		DataHandle handle = null;
@@ -43,6 +46,10 @@ public class DataHandleFacade {
 		case DCP:
 			//数据采集
 			handle = dataCollectHandle;
+			break;
+		case RAWDATA:
+			//数据上报后透传
+			handle = forwardHandle;
 			break;
 		default:
 			break;
