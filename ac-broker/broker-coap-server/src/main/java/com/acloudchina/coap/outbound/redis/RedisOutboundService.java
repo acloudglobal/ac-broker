@@ -37,7 +37,7 @@ public class RedisOutboundService implements CommandOutboundService {
 		}
 		Set<String> keys = jedis.keys(keyRegx);
 		
-		List<byte[]> result = new ArrayList<>();
+		List<byte[]> result = new ArrayList<byte[]>();
 		for(String key : keys){
 			byte[] value = jedis.get(key.getBytes());
 			result.add(value);
@@ -53,7 +53,7 @@ public class RedisOutboundService implements CommandOutboundService {
 		String key = String.format(RedisKeyContant.COMMAND_COAP_4_TENANTID_ENDPOINTID_KEY, tenantId,endpointId);
 		
 		long size = jedis.llen(key);
-		List<String> result = new ArrayList<>();
+		List<String> result = new ArrayList<String>();
 		while(size > 0){
 			String value = jedis.rpop(key);
 			JSONObject dto = JSONObject.parseObject((String)JSON.parse(value));

@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Cache {
 
-	private static Map<String, CoapSessionCtx> cache = new ConcurrentHashMap<>();
+	private static Map<String, CoapSessionCtx> cache = new ConcurrentHashMap<String, CoapSessionCtx>();
 
 	public static void put(String key, CoapSessionCtx ctx) {
 		cache.put(key, ctx);

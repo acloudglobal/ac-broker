@@ -7,7 +7,7 @@ import org.eclipse.californium.core.observe.ObserveRelation;
 
 public class CacheExchange {
 
-	private static Map<String, ObserveRelation> cache = new ConcurrentHashMap<>();
+	private static Map<String, ObserveRelation> cache = new ConcurrentHashMap<String, ObserveRelation>();
 
 	public static void put(String key, ObserveRelation ctx) {
 		cache.put(key, ctx);

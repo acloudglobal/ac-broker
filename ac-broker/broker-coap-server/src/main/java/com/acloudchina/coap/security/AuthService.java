@@ -25,7 +25,7 @@ public class AuthService {
 			return validate();
 		} else {
 			AuthBean bean = new AuthBean();
-			bean.setAuthType(mp.get("authType")==null?-1:Integer.parseInt(mp.get("authType")));
+			bean.setAuthType(mp.get("authType")==null?3:Integer.parseInt(mp.get("authType")));
 			bean.setEndpointId(mp.get("endpointId"));
 			bean.setPassword(mp.get("password"));
 			bean.setTenantId(mp.get("tenant"));

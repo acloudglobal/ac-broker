@@ -7,7 +7,7 @@ import java.util.Map;
 public class ParamUtils {
 
 	public static Map<String, String> transelateParam(List<String> paramList, List<String> paths) {
-		Map<String, String> jo = new HashMap<>();
+		Map<String, String> jo = new HashMap<String, String>();
 		for (String params : paramList) {
 			String[] kv = params.split("=");
 			jo.put(kv[0], kv[1]);
